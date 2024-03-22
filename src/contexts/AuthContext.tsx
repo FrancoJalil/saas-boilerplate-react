@@ -90,7 +90,6 @@ export const AuthProvider = ({ children }: Props) => {
 
 
       if (response.status === 200) {
-        console.log("REFRESCADO REY")
         setAuthTokens(data)
         setUser(jwtDecode(data.access))
         localStorage.setItem('authTokens', JSON.stringify(data))
