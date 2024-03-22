@@ -47,7 +47,11 @@ export const IsRegisteredForm = ({  setShowForgotPasswordForm, email, setErrors,
                 Log In
             </Button>
             <Button disabled={isLoading} type="button" variant="outline" onClick={() => handleGoBack(BACK_FROM_IS_REGISTERED_FORM)}>Go Back</Button>
-            <a onClick={() => setShowForgotPasswordForm(true)} className="text-sm text-muted-foreground">Forgot password</a>
+            
+            <Button type="button"
+            variant={"ghost"}
+                className='flex justify-start gap-2 hover:bg-transparent hover:underline text-muted-foreground p-0 h-fit'
+                onClick={() => setShowForgotPasswordForm(true)} >Forgot password</Button>
             
         </form>
 

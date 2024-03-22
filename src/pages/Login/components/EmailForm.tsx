@@ -115,7 +115,7 @@ export const EmailForm = ({ showLoginForm, setShowLoginForm, setShowOtpForm, set
 
             <Button type="button"
             variant={"ghost"}
-                className={`flex justify-start gap-2 hover:bg-transparent hover:underline text-muted-foreground p-0 h-fit`}
+                className='flex justify-start gap-2 hover:bg-transparent hover:underline text-muted-foreground p-0 h-fit'
                 onClick={() => setShowForgotPasswordForm(true)} >Forgot password</Button>
 
         </form>
