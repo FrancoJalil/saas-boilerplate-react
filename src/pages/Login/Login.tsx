@@ -2,10 +2,11 @@ import { useContext, useState, useCallback } from "react"
 import { Icons } from "@/components/ui/icons"
 import { Button } from "@/components/ui/button"
 import {
-  BACK_FROM_IS_NOT_REGISTERED_FORM,
   BACK_FROM_OTP_FORM,
   BACK_FROM_IS_REGISTERED_FORM,
   BACK_FROM_FORGOT_PASSWORD,
+  BACK_FROM_IS_NOT_REGISTERED_FORM_GOOGLE,
+  BACK_FROM_IS_NOT_REGISTERED_FORM_EMAIL,
 } from "./utils/variables"
 
 import {
@@ -96,11 +97,11 @@ export const Login = () => {
   }
 
   const handleGoBack = useCallback<HandleGoBackFunction>((from) => {
-    if (from === BACK_FROM_IS_NOT_REGISTERED_FORM && !googleCredentials) {
+    if (from === BACK_FROM_IS_NOT_REGISTERED_FORM_EMAIL) {
       setOtpVerified(null)
       setShowOtpForm(true)
     } else if (
-      from === BACK_FROM_IS_NOT_REGISTERED_FORM && googleCredentials
+      from === BACK_FROM_IS_NOT_REGISTERED_FORM_GOOGLE
     ) {
       setGoogleCredentials(null)
       setOtp("")

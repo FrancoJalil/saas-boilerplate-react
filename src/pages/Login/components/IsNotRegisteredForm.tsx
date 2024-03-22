@@ -3,7 +3,10 @@ import { Icons } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { BACK_FROM_IS_NOT_REGISTERED_FORM } from '../utils/variables';
+import {
+    BACK_FROM_IS_NOT_REGISTERED_FORM_GOOGLE,
+    BACK_FROM_IS_NOT_REGISTERED_FORM_EMAIL
+} from '../utils/variables';
 import { urlBase } from "@/utils/variables"
 import { FormErrors } from "../models/forms"
 import { HandleGoBackFunction } from "../models/functions"
@@ -12,7 +15,7 @@ import { AuthContextType } from "@/models/context"
 
 type Props = {
     email: string
-    googleCredentials: any
+    googleCredentials: string | null
     otp: string
     showIsNotRegisteredForm: boolean
     errors: FormErrors
@@ -25,6 +28,10 @@ type Props = {
 
 
 export const IsNotRegisteredForm = ({ showIsNotRegisteredForm, email, googleCredentials, otp, errors, setErrors, isLoading, setIsLoading, handleGoBack }: Props) => {
+
+
+    const handleGoBackRegisterType = googleCredentials ? BACK_FROM_IS_NOT_REGISTERED_FORM_GOOGLE : BACK_FROM_IS_NOT_REGISTERED_FORM_EMAIL
+
 
     const { logInWithTokens } = useContext(AuthContext) as AuthContextType
     const [passwordRegister, setPasswordRegister] = useState<string>("")
@@ -43,9 +50,6 @@ export const IsNotRegisteredForm = ({ showIsNotRegisteredForm, email, googleCred
             newErrors.confirmPassword = ''
 
             try {
-                console.log(otp)
-                console.log(passwordRegister)
-                console.log(email)
                 const response = await fetch(urlBase + '/users/signup/', {
                     method: 'POST',
                     headers: {
@@ -54,7 +58,7 @@ export const IsNotRegisteredForm = ({ showIsNotRegisteredForm, email, googleCred
                     body: JSON.stringify({
                         email: email,
                         password: passwordRegister,
-                        register_type: googleCredentials ? "google" : "email", 
+                        register_type: googleCredentials ? "google" : "email",
                         otp: otp,
                         google_credential: googleCredentials
 
@@ -73,7 +77,7 @@ export const IsNotRegisteredForm = ({ showIsNotRegisteredForm, email, googleCred
 
             } catch (error) {
                 console.error('Error:', error);
-            } 
+            }
 
         }
 
@@ -117,7 +121,7 @@ export const IsNotRegisteredForm = ({ showIsNotRegisteredForm, email, googleCred
                 {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
                 Create account
             </Button>
-            <Button disabled={isLoading} type="button" variant="outline" onClick={() => handleGoBack(BACK_FROM_IS_NOT_REGISTERED_FORM)}>Go Back</Button>
+            <Button disabled={isLoading} type="button" variant="outline" onClick={() => handleGoBack(handleGoBackRegisterType)}>Go Back</Button>
 
         </form>
     )
