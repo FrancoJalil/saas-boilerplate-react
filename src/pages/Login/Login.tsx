@@ -162,7 +162,7 @@ export const Login = () => {
           <CardContent className="grid gap-4">
             <div className="grid">
               
-              <Button variant="outline" onClick={() => googleLogin()}>
+              <Button variant="outline" onClick={() => googleLogin()} disabled={!showLoginForm}>
                 <Icons.google className="mr-2 h-4 w-4" />
                 Google
               </Button>
